@@ -1,9 +1,31 @@
 class Solution {
     public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        int i=0;
+        int j=0;
+        int x=0;
+        int y=0;
 
-        String s1 = String.join("", word1);
-        String s2 = String.join("", word2);
+        while (i < word1.length && j < word2.length) {
 
-        return s1.equals(s2);
+
+            if(word1[i].charAt(x) != word2[j].charAt(y)){
+                return false;
+            }
+
+            x++;
+            y++;
+
+            if(x == word1[i].length()){
+                i++; 
+                x=0;
+            }
+
+            if(y == word2[j].length()){
+                j++;
+                y=0;
+            }
+        }
+        return i == word1.length && j == word2.length;
+
     }
 }
