@@ -1,15 +1,39 @@
+
+import java.util.Stack;
+
 class Solution {
     public boolean isValid(String s) {
 
-        while (s.contains("()") ||
-               s.contains("{}") ||
-               s.contains("[]")) {
+        Stack<Character> stack = new Stack<>();
 
-            s = s.replace("()", "");
-            s = s.replace("{}", "");
-            s = s.replace("[]", "");
+        for (int i = 0; i < s.length(); i++) {
+
+            char ch = s.charAt(i);
+
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            } 
+            else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+                char top = stack.pop();
+
+                if (ch == ')' && top != '(') {
+                    return false;
+                }
+
+                if (ch == '}' && top != '{') {
+                    return false;
+                }
+
+                if (ch == ']' && top != '[') {
+                    return false;
+                }
+            }
         }
 
-        return s.length() == 0;
+        return stack.isEmpty();
     }
 }
